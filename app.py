@@ -38,8 +38,10 @@ def read_record(id):
 def get_record():
     output = []
     for user in collection.find():
-        print(user)
-        output.append(user)
+        temp_user = {}
+        for key in list(user.keys()):
+                temp_user[key] = str(user[key])
+        output.append(temp_user)
 
     print(output)
 
