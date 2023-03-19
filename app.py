@@ -24,6 +24,7 @@ def create_record():
     data = request.json
     result = collection.insert_one(data)
     return JSONEncoder().encode({'message': 'Record created successfully!', 'id': str(result.inserted_id)}), 201
+    # return jsonify(result)
 
 @app.route('/read/<id>', methods=['GET'])
 def read_record(id):
@@ -33,7 +34,7 @@ def read_record(id):
     else:
         return JSONEncoder().encode({'message': 'Record not found.'}), 404
     
-@app.route('/get', methods=['GET'])
+@app.route('/dev', methods=['GET'])
 def get_record():
     output = []
     for user in collection.find():
@@ -42,7 +43,8 @@ def get_record():
 
     print(output)
 
-    return JSONEncoder().encode(output)
+    # return JSONEncoder().encode(output)
+    return json.dumps(output, indent=2)
     
 @app.route('/update/<id>', methods=['PUT'])
 def update_record(id):
